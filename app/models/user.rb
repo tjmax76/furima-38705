@@ -6,8 +6,8 @@ class User < ApplicationRecord
   
   validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "英数字を両方使用してください"}
   validates :nickname, presence: true
-  validates :first_name, presence: true, format: {with: /\A[ぁ-んァ-ヶー－龥]+\z/, message: "全角文字(漢字、ひらがな、カタカナ)のみ使えます"}
-  validates :last_name, presence: true, format: {with: /\A[ぁ-んァ-ヶー－龥]+\z/, message: "全角文字(漢字、ひらがな、カタカナ)のみ使えます"}
+  validates :first_name, presence: true, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "全角文字(漢字、ひらがな、カタカナ)のみ使えます"}
+  validates :last_name, presence: true, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "全角文字(漢字、ひらがな、カタカナ)のみ使えます"}
   validates :katakana_first_name, presence: true, format: {with: /\A[ァ-ヶー－]+\z/, message: "全角カタカナのみ使えます"}
   validates :katakana_last_name, presence: true, format: {with: /\A[ァ-ヶー－]+\z/, message: "全角カタカナのみ使えます"}
   validates :birth_day, presence: true
