@@ -1,5 +1,9 @@
 require_relative 'boot'
-
+require 'devise'
+require 'pry-rails'
+require 'rspec-rails'
+require 'factory_bot_rails'
+require 'faker'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -17,3 +21,4 @@ module Furima38705
     # the framework and any gems in your application.
   end
 end
+Faker::Config.locale = :ja
