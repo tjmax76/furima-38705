@@ -60,4 +60,4 @@ group :production do
 end
 gem 'devise'
 gem 'pry-rails'
-gem 'faker'
+gem 'faker' # Fakerをここに配置しないとなぜかデプロイ時に'NameError: uninitialized constant Faker'が発生する(devlopment, testではダメ)
