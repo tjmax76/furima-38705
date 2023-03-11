@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
   def index
   end
 
@@ -18,6 +19,13 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :detail, :category_id, :condition_id, :shipping_charge_id, :shipping_date_id, :prefecture_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :detail, :category_id, :condition_id, :shipping_charge_id, :shipping_date_id,
+                                 :prefecture_id, :price, :image).merge(user_id: current_user.id)
+  end
+
+  def move_guest_user
+    return if user_signed_in?
+
+    redirect_to
   end
 end
