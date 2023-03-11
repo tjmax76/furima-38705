@@ -61,7 +61,7 @@ end
 
 gem 'devise'
 gem 'pry-rails'
-gem 'faker'
+gem 'faker' # Fakerをここに配置しないとなぜかデプロイ時に'NameError: uninitialized constant Faker'が発生する(devlopment, testではダメ)
 gem 'active_hash'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
