@@ -22,10 +22,4 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :detail, :category_id, :condition_id, :shipping_charge_id, :shipping_date_id,
                                  :prefecture_id, :price, :image).merge(user_id: current_user.id)
   end
-
-  def move_guest_user
-    return if user_signed_in?
-
-    redirect_to
-  end
 end
