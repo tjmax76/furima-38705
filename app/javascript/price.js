@@ -1,7 +1,8 @@
-const url = location.href;
-if(url.includes('/items/new')){
+const pathName = location.pathname;
+  const editReg = /items\/\d{1,}\/edit+$/;
+if(pathName == '/items/new' || pathName.match(editReg)){
   function price() {
-    const priceForm = document.getElementById('item-price');
+  const priceForm = document.getElementById('item-price');
     priceForm.addEventListener('keyup', () => {
         const taxElement = document.getElementById('add-tax-price');
         const profitElement = document.getElementById('profit');
