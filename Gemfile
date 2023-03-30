@@ -65,3 +65,4 @@ gem 'faker' # Fakerをここに配置しないとなぜかデプロイ時に'Nam
 gem 'active_hash'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+gem 'payjp'
