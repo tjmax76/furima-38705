@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_unmatched_user, only: [:edit, :destory]
   def index
-    @items = Item.order('created_at DESC')
+    @items = Item.includes(:order).order('created_at DESC')
   end
 
   def new
@@ -23,6 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    return unless @item.order
+
+    redirect_to root_path
   end
 
   def update
