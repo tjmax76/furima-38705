@@ -12,6 +12,7 @@ class Item < ApplicationRecord
                             message: '¥300 ~ ¥9,999,999の整数で指定してください' }
 
   belongs_to :user
+  has_one :order
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
