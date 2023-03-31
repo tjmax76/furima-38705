@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
-  before_action :move_top_page, only: [:new, :create]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :move_top_page
+  before_action :authenticate_user!
+  before_action :set_item
 
   def new
     @order_address = OrderAddress.new
-    @item = Item.find(params[:item_id])
     return unless @item.order
 
     redirect_to root_path
@@ -12,9 +12,8 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_address_params)
-    @item = Item.find(params[:item_id])
     if @order_address.valid?
-      pay_item
+      pay_item(@item)
       @order_address.save
       redirect_to root_path
     else
@@ -30,9 +29,8 @@ class OrdersController < ApplicationController
     )
   end
 
-  def pay_item
+  def pay_item(item)
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-    @item = Item.find(params[:item_id])
     Payjp::Charge.create(
       amount: @item.price,
       card: order_address_params[:token],
@@ -46,5 +44,9 @@ class OrdersController < ApplicationController
     return unless user_signed_in? && current_user.id == user.id
 
     redirect_to root_path
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end
