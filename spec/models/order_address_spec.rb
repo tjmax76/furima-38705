@@ -27,8 +27,14 @@ RSpec.describe OrderAddress, type: :model do
         expect(@OdAd.errors.full_messages).to include "Post address can't be blank"
       end
 
-      it 'post_addressが数字3ケタ、ハイフン(-)、数字4ケタの並びでないと購入できない' do
+      it 'post_addressが数字3ケタ、ハイフン(-)、数字4ケタの形式でないと購入できない' do
         @OdAd.post_address = '123-456'
+        @OdAd.valid?
+        expect(@OdAd.errors.full_messages).to include 'Post address 郵便番号は半角数字でハイフンを含めて入力してください'
+      end
+
+      it 'post_addressがハイフン(-)を含んでいないと購入できない' do
+        @OdAd.post_address = '1234567'
         @OdAd.valid?
         expect(@OdAd.errors.full_messages).to include 'Post address 郵便番号は半角数字でハイフンを含めて入力してください'
       end
@@ -57,8 +63,20 @@ RSpec.describe OrderAddress, type: :model do
         expect(@OdAd.errors.full_messages).to include "Phone number can't be blank"
       end
 
-      it 'phone_numberが10〜11ケタの半角数字でないと購入できない' do
+      it 'phone_numberが9桁以下では購入できない' do
         @OdAd.phone_number = '123456789'
+        @OdAd.valid?
+        expect(@OdAd.errors.full_messages).to include 'Phone number 電話番号はハイフンを入れずに10ケタもしくは11ケタの半角数字で入力してください'
+      end
+
+      it 'phone_numberが12桁以上では購入できない' do
+        @OdAd.phone_number = '123456123456'
+        @OdAd.valid?
+        expect(@OdAd.errors.full_messages).to include 'Phone number 電話番号はハイフンを入れずに10ケタもしくは11ケタの半角数字で入力してください'
+      end
+
+      it 'phone_numberに半角数字以外が含まれていると購入できない' do
+        @OdAd.phone_number = '090-555-555'
         @OdAd.valid?
         expect(@OdAd.errors.full_messages).to include 'Phone number 電話番号はハイフンを入れずに10ケタもしくは11ケタの半角数字で入力してください'
       end
